@@ -29,8 +29,6 @@ export function registerQuestionResolvers(define) {
           ...topicIds,
         )
       : null;
-    // One expert can be assigned to several selected topics. Notify each account
-    // once per question, while retaining the first matching assignment on the question.
     const uniqueExperts = [
       ...new Map((experts || []).map((expert) => [expert.account_id, expert])).values(),
     ];
@@ -51,8 +49,6 @@ export function registerQuestionResolvers(define) {
     );
     for (const topicId of topicIds)
       await execute('INSERT INTO question_topics VALUES (?,?)', questionId, topicId);
-    // Publish a user-scoped flag event for every matching expert. Delivery is live:
-    // Forge flags can only appear while the recipient has KnowledgeFlow open.
     for (const expert of uniqueExperts) {
       try {
         const channel = `knowledgeflow-expert-${expert.account_id}`;
@@ -73,7 +69,6 @@ export function registerQuestionResolvers(define) {
           );
         }
       } catch (error) {
-        // A notification failure must not discard a successfully created question.
         console.error(`Could not notify assigned expert ${expert.account_id}:`, error);
       }
     }

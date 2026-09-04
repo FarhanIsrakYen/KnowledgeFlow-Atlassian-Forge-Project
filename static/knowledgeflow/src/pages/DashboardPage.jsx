@@ -19,8 +19,6 @@ export default function DashboardPage() {
       </PageLayout>
     );
   const count = (status) => data.counts.find((item) => item.status === status)?.count || 0;
-  // FAQ-published questions are also answered questions; publishing is the next
-  // workflow stage rather than a loss of the accepted-answer state.
   const answeredCount = Number(count('answered')) + Number(count('faq_published'));
 
   async function openSpaceBoard(spaceKey) {
