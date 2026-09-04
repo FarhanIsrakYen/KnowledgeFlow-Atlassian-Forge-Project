@@ -1,0 +1,43 @@
+modules:
+  confluence:spacePage:
+    - key: knowledgeflow-board
+      resource: knowledgeflow-ui
+      resolver: { function: resolver }
+      title: KnowledgeFlow Q&A
+      route: knowledgeflow
+  confluence:globalPage:
+    - key: knowledgeflow-dashboard
+      resource: knowledgeflow-ui
+      resolver: { function: resolver }
+      title: KnowledgeFlow dashboard
+      route: knowledgeflow-dashboard
+  confluence:globalSettings:
+    - key: knowledgeflow-admin
+      resource: knowledgeflow-ui
+      resolver: { function: resolver }
+      title: KnowledgeFlow administration
+      useAsConfig: true
+      route: knowledgeflow-admin
+  function:
+    - key: resolver
+      handler: index.handler
+  sql:
+    - key: knowledgeflow-sql
+      engine: mysql
+resources:
+  - key: knowledgeflow-ui
+    path: static/knowledgeflow/build
+permissions:
+  scopes:
+    - read:page:confluence
+    - write:page:confluence
+    - read:space:confluence
+    - read:space.permission:confluence
+    - read:user:confluence
+    - read:confluence-user
+app:
+  runtime:
+    name: nodejs24.x
+    memoryMB: 256
+    architecture: arm64
+  id: ari:cloud:ecosystem::app/cf385572-fa7f-471b-99b6-c5ae71f19ce9
