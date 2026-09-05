@@ -100,33 +100,29 @@ export default function BoardPage({ onOpenQuestion }) {
           </div>
         </form>
       )}
-      {questions.map((question) => (
-        <button
-          type="button"
-          className="card question"
-          onClick={() => onOpenQuestion(question.id)}
-          key={question.id}
-        >
-          <div>
-            <h2>{question.title}</h2>
-            <p>
-              {question.author_display_name} · {new Date(question.created_at).toLocaleDateString()}
-            </p>
-            <p>{question.topic_names || 'Unassigned'}</p>
-            {question.topic_names && (
-              <p>
-                {question.assigned_expert_name
-                  ? `Assigned to: ${question.assigned_expert_name}`
-                  : 'Unassigned'}
-              </p>
-            )}
-          </div>
-          <div>
-            <b className={`status status-${question.status}`}>{statusLabels[question.status]}</b>
-            <small>{question.answer_count} answers</small>
-          </div>
-        </button>
-      ))}
+      <section className="question-grid" aria-label="Questions">
+        {questions.map((question) => (
+          <button
+            type="button"
+            className="card question"
+            onClick={() => onOpenQuestion(question.id)}
+            key={question.id}
+          >
+            <div>
+              <h2>{question.title}</h2>
+              <p>{new Date(question.created_at).toLocaleDateString()}</p>
+              <p>{question.topic_names || 'Unassigned'}</p>
+              {question.assigned_expert_name && (
+                <p>{`Assigned to: ${question.assigned_expert_name}`}</p>
+              )}
+            </div>
+            <div>
+              <b className={`status status-${question.status}`}>{statusLabels[question.status]}</b>
+              <small>{question.answer_count} answers</small>
+            </div>
+          </button>
+        ))}
+      </section>
     </PageLayout>
   );
 }

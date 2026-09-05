@@ -50,11 +50,12 @@ export default function DashboardPage() {
       {data.recent.map((question) => (
         <button
           type="button"
-          className="card question"
+          className="card question recent-question"
           key={question.id}
           onClick={() => openSpaceBoard(question.space_key)}
         >
-          {question.title} <small>{question.space_key}</small>
+          <h3>{question.title || 'Untitled question'}</h3>
+          <small>{question.space_key}</small>
         </button>
       ))}
       <h2>Top experts</h2>
