@@ -17,6 +17,24 @@ KnowledgeFlow is a Confluence Cloud Forge Custom UI app for capturing questions 
 - Dashboard with question totals, the ten newest questions, and leading experts.
 - FAQ-page generation in the configured Confluence space, with the generated page URL stored against the question.
 
+## Screenshots
+
+### Space Q&A board
+
+![KnowledgeFlow Space Q&A board](question_space.png)
+
+### Ask a question
+
+![KnowledgeFlow question submission form](form.png)
+
+### Dashboard
+
+![KnowledgeFlow dashboard](dashboard.png)
+
+### Administration
+
+![KnowledgeFlow administration page](admin.png)
+
 ## Prerequisites
 
 - Node.js 22 or later.
